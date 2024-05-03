@@ -39,7 +39,7 @@ class VideoQuality(Enum):
     V1080 = 1080 # 1080p
     V1440 = 1440 # 2K
     V2160 = 2160 # 4K
-    MAX   =    0 # select highest resolution available
+    VMAX  =    0 # select highest resolution available
 
 class VimeoDownload():
     def __init__(self, output_file: str, master_json_url: str):
@@ -165,7 +165,7 @@ class VimeoDownload():
             download.configure_quality(False, AudioQuality.MEDIUM, VideoQuality.V1440)
             
             # will always fail, must  provide audio and video args
-            download.configure_quality(False, VideoQuality.MAX)
+            download.configure_quality(False, VideoQuality.VMAX)
         """
         if interactive_fallback == False and (audio_quality == None or video_quality == None):
             raise ValueError("Must provide audio and video quality when interactive == False")
@@ -187,7 +187,7 @@ class VimeoDownload():
         # Process video quality
         if video_quality == None:
             height = self._ask_video_quality()
-        elif video_quality == VideoQuality.MAX:
+        elif video_quality == VideoQuality.VMAX:
             height = max(self.list_heights())
         elif video_quality.value in self.list_heights():
             height = video_quality.value
@@ -216,7 +216,7 @@ class VimeoDownload():
 
         # configuration complete
         print('---- quality configuration ----')
-        print(f'video\t{self.video_json['height']}x{self.video_json['height']}')
+        print(f'video\t{self.video_json['width']}x{self.video_json['height']}')
         print(f'audio\t{self.audio_json['sample_rate']}/{self.audio_json['bitrate']}')
     
     def download_audio_video(self):
@@ -228,7 +228,8 @@ class VimeoDownload():
         
         # download audio file
         audio_base_url = self.base_url + self.audio_json['base_url']
-        self.audio_file = f'{self.output_directory()}/audio_{self.audio_json['id']}.m4a'
+        name = os.path.splitext(self.output_filename())[0]
+        self.audio_file = f'{self.output_directory()}/{name}_audio_{self.audio_json['id']}.m4a'
         audio_file = open(self.audio_file, 'wb')
         init_segment = base64.b64decode(self.audio_json['init_segment'])
         audio_file.write(init_segment)
@@ -248,7 +249,7 @@ class VimeoDownload():
 
         # create video file
         video_base_url = self.base_url + self.video_json['base_url']
-        self.video_file = f'{self.output_directory()}/video_{self.video_json['id']}.mp4'
+        self.video_file = f'{self.output_directory()}/{name}_video_{self.video_json['id']}.mp4'
         video_file = open(self.video_file, 'wb')
         init_segment = base64.b64decode(self.video_json['init_segment'])
         video_file.write(init_segment)
