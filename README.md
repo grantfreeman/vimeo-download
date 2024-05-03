@@ -69,6 +69,6 @@ VMAX	HIGH	test_3.mp4	https://42vod-adaptive.akamaized.net/<long-url>/master.json
 
 ## Acknowledgements
 This wouldn't be possible without the work of another repo which did all of the heavy lifting.  
-I simply made some fixes to work with current vimeo and added a few features.
+I simply made some fixes and added a few features.
 
 - @AbCthings: https://github.com/AbCthings/vimeo-audio-video
