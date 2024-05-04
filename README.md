@@ -37,8 +37,8 @@ The app uses a TSV (TAB-separate values) file to download your desired list of v
   - VMAX (download highest resolution available)
 - audio quality (optional)
   - LOW
-  - MEDIUM
-  - HIGH
+  - MED
+  - HI
 - mp4 output file (required)
 - master.json url (required)
 
@@ -52,9 +52,9 @@ format:
 ```
 example.tsv
 ```
-V720	HIGH	test_1.mp4	https://144vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1&query_string_ranges=1
-VMAX	MEDIUM	test_2.mp4	https://108vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1
-VMAX	HIGH	test_3.mp4	https://42vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1&query_string_ranges=1
+V720	HI	test_1.mp4	https://144vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1&query_string_ranges=1
+VMAX	MED	test_2.mp4	https://108vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1
+VMAX	HI	test_3.mp4	https://42vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1&query_string_ranges=1
 		test_4.mp4	https://80vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1&query_string_ranges=1
 		test_5.mp4	https://58vod-adaptive.akamaized.net/<long-url>/master.json?base64_init=1&query_string_ranges=1
 ```

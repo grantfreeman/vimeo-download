@@ -19,9 +19,9 @@ class AudioQuality(Enum):
     Rates vary video to video.
     Use configure_quality(True) to see detailed options.
     """
-    LOW    = 0
-    MEDIUM = 1
-    HIGH   = 2
+    LOW = 0
+    MED = 1
+    HI  = 2
 
 class VideoQuality(Enum):
     """
@@ -162,7 +162,7 @@ class VimeoDownload():
             download.configure_quality(True, AudioQuality.LOW, VideoQuality.V720)
             
             # will throw an error if quality options are not present
-            download.configure_quality(False, AudioQuality.MEDIUM, VideoQuality.V1440)
+            download.configure_quality(False, AudioQuality.MED, VideoQuality.V1440)
             
             # will always fail, must  provide audio and video args
             download.configure_quality(False, VideoQuality.VMAX)
