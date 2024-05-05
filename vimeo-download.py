@@ -177,8 +177,12 @@ class VimeoDownload():
             bitrate = self._ask_audio_quality()
         else:
             bitrates = self.list_bitrates()
+            print(len(bitrates))
             bitrates.sort() # sorts low to high
-            bitrate = bitrates[audio_quality.value]
+            if audio_quality == AudioQuality.HI:
+                bitrate = bitrates[-1]
+            else:
+                bitrate = bitrates[audio_quality.value]
         
         # Set audio quality
         index = self.list_bitrates().index(bitrate)
