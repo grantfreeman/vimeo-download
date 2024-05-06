@@ -177,7 +177,6 @@ class VimeoDownload():
             bitrate = self._ask_audio_quality()
         else:
             bitrates = self.list_bitrates()
-            print(len(bitrates))
             bitrates.sort() # sorts low to high
             if audio_quality == AudioQuality.HI:
                 bitrate = bitrates[-1]
@@ -229,6 +228,9 @@ class VimeoDownload():
         
         print(f'\n======== {self.output_filename()} ========')
         print(f'---- downloading audio and video ----')
+
+        # create output path if it doesn't exist
+        pathlib.Path(self.output_directory()).mkdir(parents=True, exist_ok=True)
         
         # download audio file
         audio_base_url = self.base_url + self.audio_json['base_url']
@@ -281,7 +283,7 @@ class VimeoDownload():
         print(f'---- combining audio and video ----')
 
         # combine using ffmpeg
-        command = f'ffmpeg -y -i {self.audio_file} -i {self.video_file} {self.output_file}'
+        command = f'ffmpeg -v quiet -stats -y -i "{self.audio_file}" -i "{self.video_file}" "{self.output_file}"'
         subprocess.call(command, shell=True)
 
         # delete stream files
